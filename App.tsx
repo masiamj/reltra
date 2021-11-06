@@ -1,6 +1,5 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
-import { ThemeProvider } from 'react-native-elements'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Navigation from './navigation'
 import useColorScheme from './hooks/useColorScheme'
@@ -15,9 +14,7 @@ export default function App() {
   } else {
     return (
       <SafeAreaProvider>
-        <ThemeProvider>
-          <Navigation colorScheme={colorScheme} />
-        </ThemeProvider>
+        <Navigation colorScheme={colorScheme} />
         <StatusBar />
       </SafeAreaProvider>
     )

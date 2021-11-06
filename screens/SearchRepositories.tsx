@@ -1,32 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import * as React from 'react';
-import { Platform, StyleSheet, View, Text } from 'react-native';
+import debounce from 'lodash/debounce';
+import React, { useEffect, useMemo, useState } from 'react';
+import { StyleSheet, Text, TextInput } from 'react-native';
+import ModalStatusBar from '@components/ModalStatusBar';
+import Container from '@components/Container';
 
 export default function SearchRepositories() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} />
+  const [inputValue, _setInputValue] = useState('');
 
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
-    </View>
+  const setInputValue = useMemo(
+    () => debounce(_setInputValue, 250),
+    [_setInputValue]
+  );
+
+  useEffect(() => {
+    if (!!inputValue) {
+    }
+  }, [inputValue]);
+
+  return (
+    <Container>
+      <TextInput
+        autoFocus
+        autoCapitalize="none"
+        autoCompleteType="off"
+        autoCorrect={false}
+        clearButtonMode="always"
+        selectionColor="black"
+        onChangeText={setInputValue}
+        placeholder="Search GitHub repos and users"
+        returnKeyType="search"
+        style={styles.textInput}
+      />
+      <ModalStatusBar />
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  textInput: {
+    fontSize: 24,
+    fontWeight: '600',
+    paddingHorizontal: 16,
+    paddingVertical: 18,
   },
 });

@@ -20,7 +20,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 interface EmptyStateProps {
   actionText?: string;
-  animationSource: string;
+  animationSource?: string;
   containerStyle?: object;
   copy: string;
   onTakeAction?: () => void;
@@ -43,11 +43,13 @@ const EmptyState = (props: EmptyStateProps) => {
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <LottieView
-        ref={animation}
-        source={animationSource}
-        style={{ width: '100%', height: '100%' }}
-      />
+      {animationSource && (
+        <LottieView
+          ref={animation}
+          source={animationSource}
+          style={{ width: '100%', height: '100%' }}
+        />
+      )}
       <Text style={styles.text}>{copy}</Text>
       {actionText && onTakeAction ? (
         <TouchableOpacity
