@@ -9,6 +9,6 @@
  * interface don't have to concern themselves with underlying resources.
  */
 
-import { Platform } from 'react-native'
+import { Platform } from 'react-native';
 
-export const isiOS = () => Platform.OS === 'ios'
+export const isiOS = () => Platform.OS === 'ios';

@@ -1,23 +1,23 @@
-import { Octokit } from '@octokit/rest'
-import consoleLogLevel from 'console-log-level'
-import { components } from '@octokit/openapi-types'
-import { throttling } from '@octokit/plugin-throttling'
-import { requestLog } from '@octokit/plugin-request-log'
+import { Octokit } from '@octokit/rest';
+import consoleLogLevel from 'console-log-level';
+import { components } from '@octokit/openapi-types';
+import { throttling } from '@octokit/plugin-throttling';
+import { requestLog } from '@octokit/plugin-request-log';
 
 /**
  * Types
  */
-type _schemas = components['schemas']
-type Repository = _schemas['repository']
-export type RepoSearchResult = _schemas['repo-search-result-item']
+type _schemas = components['schemas'];
+type Repository = _schemas['repository'];
+export type RepoSearchResult = _schemas['repo-search-result-item'];
 
 /**
  * An extensible type we can expose as the return value
  * of our repository search function
  */
 type RepositorySearchResults = {
-  results: Array<RepoSearchResult>
-}
+  results: Array<RepoSearchResult>;
+};
 
 /**
  * Default Octokit client config
@@ -35,20 +35,20 @@ const defaultClientConfig = {
     onRateLimit: (retryAfter: number, options: any, octokit: Octokit) => {
       octokit.log.warn(
         `Request quota exhausted for request ${options.method} ${options.url}`
-      )
+      );
 
       if (options.request.retryCount === 0) {
-        octokit.log.info(`Retrying after ${retryAfter} seconds!`)
-        return true
+        octokit.log.info(`Retrying after ${retryAfter} seconds!`);
+        return true;
       }
     },
     onAbuseLimit: (_retryAfter: number, options: any, octokit: Octokit) => {
       octokit.log.warn(
         `Abuse detected for request ${options.method} ${options.url}`
-      )
+      );
     },
   },
-}
+};
 
 /**
  * A ~private~ helper function that constructs an enhanced Octokit client.
@@ -56,15 +56,15 @@ const defaultClientConfig = {
 const createClient = (
   config: typeof defaultClientConfig = defaultClientConfig
 ): Octokit => {
-  const withThrottling = Octokit.plugin(throttling)
-  const withLogging = withThrottling.plugin(requestLog)
-  return new withLogging(config)
-}
+  const withThrottling = Octokit.plugin(throttling);
+  const withLogging = withThrottling.plugin(requestLog);
+  return new withLogging(config);
+};
 
 /**
  * Reusable, configured GitHub API client
  */
-const client: Octokit = createClient(defaultClientConfig)
+const client: Octokit = createClient(defaultClientConfig);
 
 /**
  * Searches GitHub repositories by keyword
@@ -72,13 +72,13 @@ const client: Octokit = createClient(defaultClientConfig)
 export const searchRepositories = async ({
   query,
 }: {
-  query: string
+  query: string;
 }): Promise<RepositorySearchResults> => {
   try {
     const {
       data: { items },
-    } = await client.rest.search.repos({ q: query })
-    return { results: items }
+    } = await client.rest.search.repos({ q: query });
+    return { results: items };
   } catch (error) {
     /**
      * We want to capture errors in our external service integrations without
@@ -101,6 +101,6 @@ export const searchRepositories = async ({
      */
     throw new Error(
       'There was an issue searching GitHub, please try again in a few minutes.'
-    )
+    );
   }
-}
+};
