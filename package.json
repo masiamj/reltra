@@ -67,8 +67,8 @@
       "eslint --fix constants/**/*",
       "eslint --fix hooks/**/*",
       "eslint --fix navigation/**/*",
-      "eslint --fix screens/**/*"
-    ],
-    "*.js": "eslint --cache --fix"
+      "eslint --fix screens/**/*",
+      "git add"
+    ]
   }
 }
