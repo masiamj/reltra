@@ -2,6 +2,7 @@
   "expo": {
     "name": "reltra",
     "slug": "reltra",
+    "owner": "lumanu_interview_mitch_masia",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
