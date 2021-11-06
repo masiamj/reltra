@@ -5,11 +5,11 @@
     "owner": "lumanu_interview_mitch_masia",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/reltra_icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/reltra_splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

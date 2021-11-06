@@ -43,6 +43,8 @@
     "@commitlint/prompt": "^14.1.0",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
     "commitizen": "^4.2.4",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
@@ -61,11 +63,11 @@
   },
   "lint-staged": {
     "./{components,constants,hooks,navigation,screens}/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix ./components",
-      "eslint --fix ./constants",
-      "eslint --fix ./hooks",
-      "eslint --fix ./navigation",
-      "eslint --fix ./screens"
+      "eslint --fix components/**/*",
+      "eslint --fix constants/**/*",
+      "eslint --fix hooks/**/*",
+      "eslint --fix navigation/**/*",
+      "eslint --fix screens/**/*"
     ],
     "*.js": "eslint --cache --fix"
   }
