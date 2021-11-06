@@ -9,7 +9,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "prepare": "husky install"
   },
   "jest": {
     "preset": "jest-expo"
@@ -43,8 +44,13 @@
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
     "commitizen": "^4.2.4",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
     "jest-expo": "~43.0.0",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.4.1",
     "typescript": "~4.3.5"
   },
   "private": true,
@@ -52,5 +58,15 @@
     "commitizen": {
       "path": "@commitlint/prompt"
     }
+  },
+  "lint-staged": {
+    "./{components,constants,hooks,navigation,screens}/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix ./components",
+      "eslint --fix ./constants",
+      "eslint --fix ./hooks",
+      "eslint --fix ./navigation",
+      "eslint --fix ./screens"
+    ],
+    "*.js": "eslint --cache --fix"
   }
 }
