@@ -10,12 +10,12 @@
  * This isn't a big deal, but one of those small touches that really makes an app feel professional and
  * inspires trust with users.
  */
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { isiOS } from '@lib/platform';
+import React from 'react'
+import { StatusBar } from 'expo-status-bar'
+import { isiOS } from '@lib/platform'
 
 const ModalStatusBar = () => {
-  return <StatusBar style={isiOS() ? 'light' : 'auto'} />;
-};
+  return <StatusBar style={isiOS() ? 'light' : 'auto'} />
+}
 
-export default ModalStatusBar;
+export default ModalStatusBar

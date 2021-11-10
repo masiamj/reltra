@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
 interface LanguageBadgeProps {
-  language: string;
+  language: string
 }
 
 const LanguageBadge = (props: LanguageBadgeProps) => {
@@ -10,8 +10,8 @@ const LanguageBadge = (props: LanguageBadgeProps) => {
     <View style={styles.container}>
       <Text style={styles.text}>{props.language}</Text>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '500',
   },
-});
+})
 
-export default LanguageBadge;
+export default LanguageBadge

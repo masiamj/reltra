@@ -9,16 +9,16 @@
  * Because of that, I chose to extend the tap target of the Icon component to be all area
  * to the right of the title using a custom implementation of an Icon wrapped in a TouchableOpacity.
  */
-import React from 'react';
-import Icon from '@expo/vector-icons/Feather';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react'
+import Icon from '@expo/vector-icons/Feather'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 interface HeaderProps {
-  onPressAdd: () => void;
+  onPressAdd: () => void
 }
 
 const Header = (props: HeaderProps) => {
-  const { onPressAdd } = props;
+  const { onPressAdd } = props
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Tracked Repositories</Text>
@@ -26,8 +26,8 @@ const Header = (props: HeaderProps) => {
         <Icon name="plus-circle" size={32} />
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
 
 /**
  * I'd normally create a design system with strongly-typed typography,
@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: '800',
   },
-});
+})
 
-export default Header;
+export default Header

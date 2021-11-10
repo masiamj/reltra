@@ -3,19 +3,19 @@
  *
  * Can be used for first-time loading states.
  */
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react'
 
 const useLatch = () => {
-  const [on, setOn] = useState<boolean>(false);
+  const [on, setOn] = useState<boolean>(false)
 
   const trip = useCallback(() => {
-    setOn(true);
-  }, []);
+    setOn(true)
+  }, [])
 
   return {
     on,
     trip,
-  };
-};
+  }
+}
 
-export default useLatch;
+export default useLatch

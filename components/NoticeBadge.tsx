@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
 interface NoticeBadgeProps {
-  copy: string;
-  prefix: string; // Notice the name `prefix`, it's generic, but descriptive
+  copy: string
+  prefix: string // Notice the name `prefix`, it's generic, but descriptive
 }
 
 const NoticeBadge = (props: NoticeBadgeProps) => {
@@ -12,8 +12,8 @@ const NoticeBadge = (props: NoticeBadgeProps) => {
       <Text style={styles.prefix}>{props.prefix}</Text>
       <Text style={styles.text}>{props.copy}</Text>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginLeft: 3,
   },
-});
+})
 
-export default NoticeBadge;
+export default NoticeBadge

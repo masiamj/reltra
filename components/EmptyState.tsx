@@ -14,16 +14,16 @@
  * By default, the opacity change on press on iOS is very stark, this lightens the effect up a bit
  * for a more pleasant experience :)
  */
-import React, { useEffect, useRef } from 'react';
-import LottieView from 'lottie-react-native';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useRef } from 'react'
+import LottieView from 'lottie-react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 interface EmptyStateProps {
-  actionText?: string;
-  animationSource?: string;
-  containerStyle?: object;
-  copy: string;
-  onTakeAction?: () => void;
+  actionText?: string
+  animationSource?: string
+  containerStyle?: object
+  copy: string
+  onTakeAction?: () => void
 }
 
 const EmptyState = (props: EmptyStateProps) => {
@@ -33,13 +33,13 @@ const EmptyState = (props: EmptyStateProps) => {
     containerStyle = {},
     copy,
     onTakeAction,
-  } = props;
+  } = props
 
-  const animation = useRef<LottieView>(null);
+  const animation = useRef<LottieView>(null)
 
   useEffect(() => {
-    animation?.current?.play();
-  }, []);
+    animation?.current?.play()
+  }, [])
 
   return (
     <View style={[styles.container, containerStyle]}>
@@ -61,8 +61,8 @@ const EmptyState = (props: EmptyStateProps) => {
         </TouchableOpacity>
       ) : null}
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   button: {
@@ -90,6 +90,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     opacity: 0.5,
   },
-});
+})
 
-export default EmptyState;
+export default EmptyState

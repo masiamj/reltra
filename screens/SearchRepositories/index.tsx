@@ -5,22 +5,17 @@
  * The custom useSearchRepositories hook decouples this UI-layer logic
  * from any implementation details of how to perform search.
  */
-import React, { useEffect } from 'react';
-import { FlatList, StyleSheet, TextInput } from 'react-native';
-import Container from '@components/Container';
-import EmptyState from '@components/EmptyState';
-import { repositoryKeyExtractor } from '@lib/github';
-import ModalStatusBar from '@components/ModalStatusBar';
-import useSearchRepositories from '@hooks/useSearchRepositories';
-import RepoSearchResultItem from './components/RepoSearchResultItem';
+import React, { useEffect } from 'react'
+import { FlatList, StyleSheet, TextInput } from 'react-native'
+import Container from '@components/Container'
+import EmptyState from '@components/EmptyState'
+import { repositoryKeyExtractor } from '@lib/github'
+import ModalStatusBar from '@components/ModalStatusBar'
+import useSearchRepositories from '@hooks/useSearchRepositories'
+import RepoSearchResultItem from './components/RepoSearchResultItem'
 
 export default function SearchRepositories() {
-  const {
-    error,
-    loading,
-    search,
-    searchResults = [],
-  } = useSearchRepositories();
+  const { error, loading, search, searchResults = [] } = useSearchRepositories()
 
   /**
    * Handling errors is always interesting!
@@ -35,9 +30,9 @@ export default function SearchRepositories() {
    */
   useEffect(() => {
     if (error) {
-      alert(error.message);
+      alert(error.message)
     }
-  }, [error]);
+  }, [error])
 
   return (
     <Container>
@@ -69,7 +64,7 @@ export default function SearchRepositories() {
       />
       <ModalStatusBar />
     </Container>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -82,4 +77,4 @@ const styles = StyleSheet.create({
   list: {
     marginTop: 16,
   },
-});
+})

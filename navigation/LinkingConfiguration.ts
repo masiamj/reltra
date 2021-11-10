@@ -4,8 +4,8 @@
  * https://reactnavigation.org/docs/configuring-links
  */
 
-import * as Linking from 'expo-linking';
-import { SEARCH_REPOSITORIES, TRACKED_REPOSITORIES } from './screenNames';
+import * as Linking from 'expo-linking'
+import { SEARCH_REPOSITORIES, TRACKED_REPOSITORIES } from './screenNames'
 
 const linking = {
   prefixes: [Linking.makeUrl('/')],
@@ -15,6 +15,6 @@ const linking = {
       [TRACKED_REPOSITORIES]: 'tracked-repositories',
     },
   },
-};
+}
 
-export default linking;
+export default linking

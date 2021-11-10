@@ -1,10 +1,10 @@
-import React from 'react';
-import Icon from '@expo/vector-icons/FontAwesome';
-import { TouchableOpacity } from 'react-native';
+import React from 'react'
+import Icon from '@expo/vector-icons/FontAwesome'
+import { TouchableOpacity } from 'react-native'
 
 interface FavoriteButtonProps {
-  isFavorite: boolean;
-  onPress: () => void;
+  isFavorite: boolean
+  onPress: () => void
 }
 
 const FavoriteButton = (props: FavoriteButtonProps) => {
@@ -16,7 +16,7 @@ const FavoriteButton = (props: FavoriteButtonProps) => {
         size={28}
       />
     </TouchableOpacity>
-  );
-};
+  )
+}
 
-export default FavoriteButton;
+export default FavoriteButton

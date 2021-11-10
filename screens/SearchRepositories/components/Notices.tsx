@@ -1,14 +1,14 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { RepoSearchResult } from '@lib/github';
-import NoticeBadge from '@components/NoticeBadge';
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { RepoSearchResult } from '@lib/github'
+import NoticeBadge from '@components/NoticeBadge'
 
 interface NoticesProps {
-  repo: RepoSearchResult;
+  repo: RepoSearchResult
 }
 
 const Notices = (props: NoticesProps) => {
-  const { repo } = props;
+  const { repo } = props
   return (
     <View style={styles.container}>
       {repo.stargazers_count > 0 && (
@@ -18,8 +18,8 @@ const Notices = (props: NoticesProps) => {
         <NoticeBadge prefix="⚠️" copy={`${repo.open_issues_count} issues`} />
       )}
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 8,
   },
-});
+})
 
-export default Notices;
+export default Notices
