@@ -16,6 +16,17 @@ module.exports = function (api) {
           },
         },
       ],
+      [
+        'module:react-native-dotenv',
+        {
+          allowList: ['GITHUB_PERSONAL_ACCESS_TOKEN'],
+          allowUndefined: false,
+          envName: 'development',
+          moduleName: '@env',
+          path: '.env',
+          verbose: true,
+        },
+      ],
     ],
   }
 }
