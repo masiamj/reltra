@@ -29,7 +29,7 @@ export const repositoryKeyExtractor = getId
 export const viewRepoInWebBrower = async (repo: RepoSearchResult) => {
   try {
     // Maybe add analytics?
-    WebBrowser.openBrowserAsync(repo.html_url)
+    WebBrowser.openBrowserAsync(repo.homepageUrl || repo.url)
   } catch (error) {
     // Log the error
     alert(`We're unable to open that link right now.`)

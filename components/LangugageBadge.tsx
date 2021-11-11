@@ -1,14 +1,22 @@
-import React from 'react'
+import { RepoSearchResult } from '@lib/github'
+import React, { useMemo } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 interface LanguageBadgeProps {
-  language: string
+  language: RepoSearchResult['primaryLanguage']
 }
 
 const LanguageBadge = (props: LanguageBadgeProps) => {
+  const { language } = props
+
+  const textColor = useMemo(
+    () => (language.name === 'JavaScript' ? 'black' : 'white'),
+    [language.name]
+  )
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{props.language}</Text>
+    <View style={[styles.container, { backgroundColor: language.color }]}>
+      <Text style={[styles.text, { color: textColor }]}>{language.name}</Text>
     </View>
   )
 }
@@ -16,16 +24,15 @@ const LanguageBadge = (props: LanguageBadgeProps) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: 'lightblue',
     borderRadius: 12,
     justifyContent: 'center',
     paddingHorizontal: 6,
     paddingVertical: 3,
   },
   text: {
-    color: 'darkblue',
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: '500',
+    textAlign: 'center',
   },
 })
 

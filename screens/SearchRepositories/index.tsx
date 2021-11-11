@@ -13,6 +13,7 @@ import { repositoryKeyExtractor } from '@lib/github'
 import ModalStatusBar from '@components/ModalStatusBar'
 import useSearchRepositories from '@hooks/useSearchRepositories'
 import RepoSearchResultItem from './components/RepoSearchResultItem'
+import ListItemSeparator from '@components/ListItemSeparator'
 
 export default function SearchRepositories() {
   const { error, loading, search, searchResults = [] } = useSearchRepositories()
@@ -49,7 +50,7 @@ export default function SearchRepositories() {
         style={styles.textInput}
       />
       <FlatList
-        contentContainerStyle={{ paddingBottom: 24 }}
+        contentContainerStyle={styles.listContent}
         style={styles.list}
         data={searchResults}
         keyExtractor={repositoryKeyExtractor}
@@ -61,6 +62,7 @@ export default function SearchRepositories() {
             copy={loading ? 'Loading...' : 'No search results found'}
           />
         }
+        ItemSeparatorComponent={() => <ListItemSeparator />}
       />
       <ModalStatusBar />
     </Container>
@@ -76,5 +78,8 @@ const styles = StyleSheet.create({
   },
   list: {
     marginTop: 16,
+  },
+  listContent: {
+    paddingBottom: 24,
   },
 })

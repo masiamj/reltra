@@ -13,7 +13,7 @@ const FavoriteButton = (props: FavoriteButtonProps) => {
       <Icon
         name={props.isFavorite ? 'heart' : 'heart-o'}
         color={props.isFavorite ? 'red' : 'gray'}
-        size={28}
+        size={24}
       />
     </TouchableOpacity>
   )

@@ -2,7 +2,6 @@ import React, { useCallback } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { RepoSearchResult, viewRepoInWebBrower } from '@lib/github'
 import LanguageBadge from '@components/LangugageBadge'
-import Notices from './Notices'
 import FavoriteButton from '@components/FavoriteButton'
 
 interface RepoSearchResultProps {
@@ -31,19 +30,20 @@ const RepoSearchResultItem = (props: RepoSearchResultProps) => {
         <FavoriteButton isFavorite onPress={onPressFavorite} />
       </View>
       <View style={styles.content}>
-        <View style={styles.titleContent}>
-          <Image
-            source={{ uri: repo.openGraphImageUrl }}
-            style={styles.ogImage}
-            resizeMode="cover"
-          />
+        <Image
+          source={{ uri: repo.openGraphImageUrl }}
+          style={styles.ogImage}
+          resizeMode="cover"
+        />
+        <View style={styles.repoContent}>
           <Text style={styles.name}>{repo.name}</Text>
+          <Text style={styles.description}>{repo.description}</Text>
         </View>
-        <Text style={styles.description}>{repo.description}</Text>
-        <Notices repo={repo} />
       </View>
       <View style={styles.languageContainer}>
-        {repo.language && <LanguageBadge language={repo.language} />}
+        {repo.primaryLanguage && (
+          <LanguageBadge language={repo.primaryLanguage} />
+        )}
       </View>
     </TouchableOpacity>
   )
@@ -57,34 +57,36 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   content: {
-    flexDirection: 'column',
-    width: '60%',
-    marginRight: 8,
+    flexDirection: 'row',
+    width: '76%',
+    paddingHorizontal: 12,
+    marginHorizontal: 4,
   },
   description: {
     fontSize: 12,
-    marginTop: 6,
+    marginTop: 2,
     opacity: 0.7,
   },
   favoriteContainer: {
     width: '8%',
   },
   languageContainer: {
-    width: '20%',
+    width: '16%',
   },
   name: {
     fontSize: 16,
     fontWeight: '500',
-    marginLeft: 8,
   },
   ogImage: {
     borderRadius: 8,
-    height: 36,
-    width: 36,
+    height: 28,
+    width: 28,
   },
-  titleContent: {
+  repoContent: {
     alignItems: 'flex-start',
-    flexDirection: 'row',
+    flexDirection: 'column',
+    width: '80%',
+    marginLeft: 8,
   },
 })
 

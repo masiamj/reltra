@@ -2,7 +2,53 @@ import { GITHUB_PERSONAL_ACCESS_TOKEN } from '@env'
 import { graphql } from '@octokit/graphql'
 
 /**
- * A ~private~ helper function that constructs an enhanced Octokit client.
+ * An extensible type we can expose as the return value
+ * of our repository search function
+ */
+export type RepoSearchResult = {
+  createdAt: string
+  description: string
+  forkCount: number
+  homepageUrl: string
+  id: string
+  latestRelease: {
+    createdAt: string
+    id: string
+    name: string
+    publishedAt: string
+    tag: {
+      id: string
+      name: string
+    }
+    tagCommit: {
+      committedDate: string
+      id: string
+      message: string
+      messageHeadline: string
+    }
+    tagName: string
+    updatedAt: string
+  }
+  name: string
+  openGraphImageUrl: string
+  owner: {
+    avatarUrl: string
+    id: string
+    login: string
+    url: string
+  }
+  primaryLanguage: {
+    id: string
+    color: string
+    name: string
+  }
+  updatedAt: string
+  url: string
+}
+
+/**
+ * Default Octokit client config
+ * We make the client configurable at runtime for testing purposes
  */
 const createClient = ({ authorization }: { authorization: string }) => {
   return graphql.defaults({
@@ -19,8 +65,20 @@ const client = createClient({
   authorization: `token ${GITHUB_PERSONAL_ACCESS_TOKEN}`,
 })
 
-export const searchRepos = async ({ query }: { query: string }) => {
+/**
+ * Searches GitHub repositories by keyword
+ */
+export const searchRepos = async ({
+  query,
+}: {
+  query: string
+}): Promise<{ results: Array<RepoSearchResult> }> => {
   try {
+    /**
+     * I'm not that familiar with the GitHub Octokit API Client; however,
+     * in Apollo world, this would be a great use case for fragments!
+     * https://www.apollographql.com/docs/react/data/fragments/
+     */
     const {
       search: { nodes },
     } = await client(
@@ -30,13 +88,12 @@ export const searchRepos = async ({ query }: { query: string }) => {
             nodes {
               __typename
               ... on Repository {
-                createdAt
                 description
-                forkCount
                 homepageUrl
                 id
                 latestRelease {
                   createdAt
+                  id
                   name
                   publishedAt
                   tag {
@@ -53,37 +110,12 @@ export const searchRepos = async ({ query }: { query: string }) => {
                 }
                 name
                 openGraphImageUrl
-                owner {
-                  avatarUrl(size: 80)
-                  id
-                  login
-                  url
-                }
                 primaryLanguage {
                   id
                   color
                   name
                 }
-                releases(
-                  first: 1
-                  orderBy: { field: CREATED_AT, direction: DESC }
-                ) {
-                  nodes {
-                    createdAt
-                    id
-                    name
-                    publishedAt
-                    tagCommit {
-                      id
-                      message
-                      messageHeadline
-                      pushedDate
-                    }
-                    tagName
-                    updatedAt
-                  }
-                }
-                updatedAt
+                url
               }
             }
           }
