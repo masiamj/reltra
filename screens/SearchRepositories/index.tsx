@@ -11,14 +11,12 @@ import Container from '@components/Container'
 import EmptyState from '@components/EmptyState'
 import { repositoryKeyExtractor } from '@lib/github'
 import ModalStatusBar from '@components/ModalStatusBar'
+import ListItemSeparator from '@components/ListItemSeparator'
 import useSearchRepositories from '@hooks/useSearchRepositories'
 import RepoSearchResultItem from './components/RepoSearchResultItem'
-import ListItemSeparator from '@components/ListItemSeparator'
-import useFavoriteRepositories from '@hooks/useFavoriteRepositories'
 
 export default function SearchRepositories() {
-  const { error, loading, search, searchResults = [] } = useSearchRepositories()
-  const { toggleFavorite } = useFavoriteRepositories()
+  const { error, loading, search, searchResults } = useSearchRepositories()
 
   /**
    * Handling errors is always interesting!
@@ -58,7 +56,7 @@ export default function SearchRepositories() {
         keyExtractor={repositoryKeyExtractor}
         refreshing={loading}
         renderItem={({ item }) => (
-          <RepoSearchResultItem onToggle={toggleFavorite} repo={item} />
+          <RepoSearchResultItem onToggle={console.log} repo={item} />
         )}
         ListEmptyComponent={
           <EmptyState

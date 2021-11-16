@@ -4,7 +4,6 @@ import ScreenContainer from '@components/ScreenContainer'
 import { SEARCH_REPOSITORIES } from '@navigation/screenNames'
 import { FlatList, StyleSheet } from 'react-native'
 import EmptyState from '@components/EmptyState'
-import useFavoriteRepositories from '@hooks/useFavoriteRepositories'
 
 interface TrackedRepositoriesProps {
   navigation: any
@@ -12,8 +11,6 @@ interface TrackedRepositoriesProps {
 
 const TrackedRepositories = (props: TrackedRepositoriesProps) => {
   const { navigation } = props
-  const all = useFavoriteRepositories()
-  console.log(all)
 
   const navigateToAddRepo = useCallback(() => {
     navigation.push(SEARCH_REPOSITORIES)
