@@ -14,9 +14,11 @@ import ModalStatusBar from '@components/ModalStatusBar'
 import useSearchRepositories from '@hooks/useSearchRepositories'
 import RepoSearchResultItem from './components/RepoSearchResultItem'
 import ListItemSeparator from '@components/ListItemSeparator'
+import useFavoriteRepositories from '@hooks/useFavoriteRepositories'
 
 export default function SearchRepositories() {
   const { error, loading, search, searchResults = [] } = useSearchRepositories()
+  const { toggleFavorite } = useFavoriteRepositories()
 
   /**
    * Handling errors is always interesting!
@@ -55,7 +57,9 @@ export default function SearchRepositories() {
         data={searchResults}
         keyExtractor={repositoryKeyExtractor}
         refreshing={loading}
-        renderItem={({ item }) => <RepoSearchResultItem repo={item} />}
+        renderItem={({ item }) => (
+          <RepoSearchResultItem onToggle={toggleFavorite} repo={item} />
+        )}
         ListEmptyComponent={
           <EmptyState
             containerStyle={{ marginTop: '10%' }}

@@ -5,20 +5,20 @@ import LanguageBadge from '@components/LangugageBadge'
 import FavoriteButton from '@components/FavoriteButton'
 
 interface RepoSearchResultProps {
-  onAdd?: (repo: RepoSearchResult) => void
+  onToggle: (repo: RepoSearchResult) => void
   repo: RepoSearchResult
 }
 
 const RepoSearchResultItem = (props: RepoSearchResultProps) => {
-  const { onAdd, repo } = props
+  const { onToggle, repo } = props
 
   const viewOnTheWeb = useCallback(async () => {
     await viewRepoInWebBrower(repo)
   }, [repo])
 
   const onPressFavorite = useCallback(() => {
-    // onAdd(repo)
-  }, [onAdd, repo])
+    onToggle(repo)
+  }, [onToggle, repo])
 
   return (
     <TouchableOpacity

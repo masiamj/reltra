@@ -23,6 +23,7 @@
     "@octokit/plugin-request-log": "^1.0.4",
     "@octokit/plugin-throttling": "^3.5.2",
     "@octokit/rest": "^18.12.0",
+    "@react-native-async-storage/async-storage": "^1.15.11",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
