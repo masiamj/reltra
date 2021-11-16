@@ -1,14 +1,16 @@
 import {
   ApolloClient,
   InMemoryCache,
+  gql,
   from,
   NormalizedCacheObject,
   HttpLink,
 } from '@apollo/client'
 import DebounceLink from 'apollo-link-debounce'
+import { GITHUB_PERSONAL_ACCESS_TOKEN } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { AsyncStorageWrapper, CachePersistor } from 'apollo3-cache-persist'
-import { GITHUB_PERSONAL_ACCESS_TOKEN } from '@env'
+import { setCacheInstance } from './globalCache'
 
 export interface GitHubClientConfig {
   authorizationToken: string
@@ -32,7 +34,19 @@ export const authorizationToken = GITHUB_PERSONAL_ACCESS_TOKEN
 export const createClient = async (
   config: GitHubClientConfig
 ): Promise<CreateClientResult> => {
-  const cache = new InMemoryCache()
+  const cache = new InMemoryCache({
+    typePolicies: {
+      Repository: {
+        fields: {
+          isFavorite: {
+            read(isFavorite = false) {
+              return isFavorite
+            },
+          },
+        },
+      },
+    },
+  })
 
   /**
    * Implements automatic cache persistence to AsyncStorage
@@ -57,7 +71,10 @@ export const createClient = async (
   const client = new ApolloClient({
     cache,
     link,
+    typeDefs,
   })
+
+  setCacheInstance(cache)
 
   return { client, persistor }
 }
@@ -66,6 +83,13 @@ export const createClient = async (
  * Default client enhancers
  */
 export const defaultLinks = from([new DebounceLink(200)])
+
+const typeDefs = gql`
+  extend type Repository {
+    isFavorite: Boolean!
+    lastViewedRelease: String
+  }
+`
 
 /**
  * Default GitHub GraphQL API

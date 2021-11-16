@@ -5,7 +5,7 @@ import LanguageBadge from '@components/LangugageBadge'
 import FavoriteButton from '@components/FavoriteButton'
 
 interface RepoSearchResultProps {
-  onToggle: (repo: RepoSearchResult) => void
+  onToggle: (repo: RepoSearchResult, isFavorite: boolean) => void
   repo: RepoSearchResult
 }
 
@@ -17,7 +17,7 @@ const RepoSearchResultItem = (props: RepoSearchResultProps) => {
   }, [repo])
 
   const onPressFavorite = useCallback(() => {
-    onToggle(repo)
+    onToggle(repo, !repo.isFavorite)
   }, [onToggle, repo])
 
   return (
@@ -27,7 +27,10 @@ const RepoSearchResultItem = (props: RepoSearchResultProps) => {
       style={styles.container}
     >
       <View style={styles.favoriteContainer}>
-        <FavoriteButton isFavorite onPress={onPressFavorite} />
+        <FavoriteButton
+          isFavorite={repo.isFavorite}
+          onPress={onPressFavorite}
+        />
       </View>
       <View style={styles.content}>
         <Image

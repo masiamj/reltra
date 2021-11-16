@@ -1,2 +1,3 @@
 export * from './utils'
-export * from './apollo'
+export * from './graphql'
+export * from './globalCache'

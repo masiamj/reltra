@@ -10,6 +10,8 @@ export type RepoSearchResult = {
   forkCount: number
   homepageUrl: string
   id: string
+  isFavorite: boolean
+  lastViewedRelease: string | null
   latestRelease: {
     createdAt: string
     id: string
@@ -45,11 +47,19 @@ export type RepoSearchResult = {
   url: string
 }
 
+/**
+ * Note the use of the @client directive for a local-only field
+ * We use this to collate all state management into our reactive
+ * queries.
+ * https://www.apollographql.com/docs/react/local-state/managing-state-with-field-policies/
+ */
 export const repositoryFields = gql`
   fragment repositoryFields on Repository {
     description
     homepageUrl
     id
+    isFavorite @client
+    lastViewedRelease @client
     latestRelease {
       createdAt
       id

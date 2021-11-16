@@ -20,6 +20,9 @@ interface UseSearchRepositories {
   searchResults: Array<RepoSearchResult>
 }
 
+/**
+ * GraphQL Query using Repository fields fragment for reusability
+ */
 const template = gql`
   ${repositoryFields}
   query Search($searchPhrase: String!) {
@@ -44,7 +47,7 @@ const useSearchRepositories = (): UseSearchRepositories => {
     },
   })
 
-  const searchResults = useMemo(
+  const searchResults: Array<RepoSearchResult> = useMemo(
     () => get(data, ['search', 'nodes'], []),
     [data]
   )
